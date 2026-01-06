@@ -27,13 +27,15 @@
         @media print {
             @page {
                 size: A4;
-                margin: 0; /* تصفير هوامش الطابعة الافتراضية للتحكم بها عبر CSS */
+                margin: 0; /* تصفير هوامش الطابعة */
             }
-            body {
+            html, body {
+                width: 210mm;
+                height: 297mm;
+                margin: 0 !important;
+                padding: 0 !important;
                 background-color: white;
-                -webkit-print-color-adjust: exact;
-                margin: 0;
-                padding: 0;
+                overflow: hidden; /* منع ظهور صفحة ثانية فارغة */
             }
             .no-print {
                 display: none !important;
@@ -43,12 +45,13 @@
             }
             .a4-page {
                 width: 210mm;
-                height: 296mm; /* تحديد ارتفاع A4 */
-                padding: 15mm 20mm; /* هوامش داخلية موزونة: 15مم من الأعلى/الأسفل و 20مم من الجوانب */
-                margin: 0 auto;
+                height: 296mm; /* أقل بملم واحد لضمان عدم تجاوز الصفحة */
+                padding: 15mm 20mm;
+                margin: 0 auto !important;
                 background: white;
                 position: relative;
-                overflow: hidden; /* منع خروج أي عنصر خارج الصفحة */
+                overflow: hidden;
+                page-break-after: avoid; /* منع فواصل الصفحات */
             }
             /* إجبار الخلفيات والألوان على الظهور في الطباعة */
             * {
@@ -342,8 +345,8 @@
             <!-- ترويسة التقرير -->
             <header class="flex justify-between items-center border-b-4 border-black pb-4 mb-6">
                 <div class="text-right">
-                    <h2 class="font-bold text-lg">وزارة التعليم</h2>
-                    <h3 class="text-md">استمارة التطوير المهني للمعلم</h3>
+                    <!-- تم حذف اسم الوزارة من هنا -->
+                    <h3 class="text-md font-bold mt-2">استمارة التطوير المهني للمعلم</h3>
                 </div>
                 <div class="text-center">
                     <div class="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center border-2 border-black">
